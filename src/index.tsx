@@ -1,23 +1,25 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './index.css';
+import React from 'react'
+import App from './App'
+import reportWebVitals from './reportWebVitals'
+import { createRoot } from 'react-dom/client'
+import { AppContextProvider } from './AppContext'
 
-const container = document.getElementById('root')!;
-const root = createRoot(container);
+import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
+import { firebaseConfig } from './config'
+
+import './index.css'
+
+const firebaseApp = initializeApp(firebaseConfig)
+const db = getFirestore(firebaseApp)
+
+const container = document.getElementById('root')!
+const root = createRoot(container)
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
+    <AppContextProvider value={{firestore: {db}}}>
+        <App />
+    </AppContextProvider>
+)
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals()
