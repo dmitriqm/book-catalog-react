@@ -5,8 +5,9 @@
 
 
 html, body {
-  width: 100%;
-  height: 100%; 
+  display: flex;
+  flex: auto;
+  background-color: #F4F2EF;
 }
 
 body {
@@ -24,5 +25,6 @@ code {
 #root {
   width: 100%;
   height: 100%;
-  background-color: #F4F2EF;
+  display: flex;
+  flex-direction: column;
 }
