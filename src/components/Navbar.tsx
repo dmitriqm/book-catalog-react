@@ -8,7 +8,7 @@ import logo from "../assets/logo.svg";
 import menu from "../assets/menu.svg";
 
 const navs = [
-  { title: "Поиск", to: "/search" },
+  // { title: "Поиск", to: "/search" },
   { title: "Каталог", to: "/catalog" },
   { title: "Рекомендации", to: "recomendations" },
 ];
@@ -19,14 +19,14 @@ const Navbar = () => {
 
   return (
     <nav className="flex flex-col lg:flex-row justify-between lg:h-20 border-slate-200 bg-white w-full flex-grow-0 flex-shrink-0">
-      <section className="flex justify-between border-b flex-auto flex-shrink-0">
-        <section className="flex h-full items-center flex-shrink-0">
-          <section className="px-2 lg:px-4 m-1 py-1">
+      <div className="flex justify-between border-b flex-auto flex-shrink-0">
+        <div className="flex h-full items-center flex-shrink-0">
+          <div className="px-2 lg:px-4 m-1 py-1">
             <NavLink to="/" className="w-fit h-fit">
               <img className="w-12 lg:h-14 lg:w-14" src={logo} alt="" />
             </NavLink>
-          </section>
-          <section className="hidden lg:flex h-full">
+          </div>
+          <div className="hidden lg:flex h-full">
             {navs.map(({ title, to }, idx) => (
               <NavLink
                 key={idx}
@@ -43,19 +43,19 @@ const Navbar = () => {
                 {title}
               </NavLink>
             ))}
-          </section>
-        </section>
+          </div>
+        </div>
         <button
           className="mx-4 lg:hidden"
           onClick={() => dispatch(toggleMenu())}
         >
           <img className="w-8" src={menu} alt="" />
         </button>
-      </section>
+      </div>
 
-      <section
+      <div
         className={`lg:h-0 lg:hidden ${
-          isOpen ? "h-40" : "h-0"
+          isOpen ? `h-40` : "h-0"
         } overflow-hidden transition-all duration-700 ease-out flex flex-col`}
       >
         {isOpen ? (
@@ -79,7 +79,7 @@ const Navbar = () => {
             ))}
           </>
         ) : null}
-      </section>
+      </div>
     </nav>
   );
 };

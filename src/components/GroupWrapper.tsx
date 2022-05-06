@@ -5,12 +5,17 @@ interface GroupProps {
   title: string;
   length?: number;
   path: string
+  type? : 'col' | 'row'
 }
 
-const GroupWrapper = ({ title, path,length, children }: GroupProps) => {
+const GroupWrapper = ({ type = 'row', title, path,length, children }: GroupProps) => {
+  if (!children) {
+    return null
+  }
+
   return (
-    <section className="flex flex-col items-center mb-12">
-      <h2 className="self-start text-3xl mb-6">
+    <div className="lg:w-8/12 w-full flex flex-col items-center mb-6 flex-grow-0">
+      <h2 className="self-start text-2xl md:text-3xl mb-4">
         <NavLink to={path} className="hover:text-amber-600">
           {title}
           {
@@ -20,8 +25,15 @@ const GroupWrapper = ({ title, path,length, children }: GroupProps) => {
           }
         </NavLink>
       </h2>
-      {children}
-    </section>
+      {/* TODO СДЕЛАТЬ ЧТОБ БЫЛИ КНОПКИ СКРОЛЛА ИЛИ ПОМЕНЯТЬ ПРИНЦИП, Т.К. С МЫШИ НЕ СКРОЛИТСЯ */}
+      <div className={
+          type === "row"
+          ? "flex flex-row flex-grow-0 flex-shrink-0 w-11/12 overflow-x-auto"
+          : "flex flex-col flex-grow-0 flex-shrink-0 w-11/12"
+        }>
+        {children}
+      </div>
+    </div>
   );
 };
 

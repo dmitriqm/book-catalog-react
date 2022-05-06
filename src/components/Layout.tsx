@@ -3,10 +3,10 @@ import Navbar from "./Navbar"
 
 const Layout = () => {
   return <>
-    <header className="mb-6 flex flex-auto bg-white">
+    <header className="flex mb-6 bg-white">
       <Navbar />
     </header>
-    <main className="flex mx-8 flex-col items-center mb-8">
+    <main className="flex mx-2 flex-col items-center">
       <Outlet />
     </main>
   </>
