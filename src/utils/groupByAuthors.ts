@@ -10,12 +10,12 @@ export function groupBooksByAuthor(books: IBook[]): GroupedBooksByAuthor {
   books.forEach((book) => {
     book.authors.forEach((author) => {
       if (groupedBooks.hasOwnProperty(author)) {
-        groupedBooks[author].push(book)
+        groupedBooks[author].push(book);
       } else {
-        groupedBooks[author] = [book]
+        groupedBooks[author] = [book];
       }
-    })
-  })
+    });
+  });
 
   return groupedBooks;
 }

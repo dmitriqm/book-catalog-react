@@ -31,23 +31,24 @@ const Author = () => {
     }
   }, [books]);
 
-
   if (loading) {
-    return <Loader />
+    return <Loader />;
   }
 
-  return (  
-    <GroupWrapper title={year! !== 'undefined' ? year! : 'Год не указан'} length={yearBooks.length}>
-      {
-        yearBooks.length ? 
-          <>
+  return (
+    <GroupWrapper
+      title={year! !== "undefined" ? year! : "Год не указан"}
+      length={yearBooks.length}
+    >
+      {yearBooks.length ? (
+        <>
           {yearBooks.map((book) => (
             <BookCard book={book} key={book.id} />
-          ))} 
-          </>
-          : <p>Книги не найдены</p> 
-        
-      }
+          ))}
+        </>
+      ) : (
+        <p>Книги не найдены</p>
+      )}
     </GroupWrapper>
   );
 };

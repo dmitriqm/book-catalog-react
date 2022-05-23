@@ -1,4 +1,11 @@
-import { collection, getDoc, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  getDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../firestore";
 import { IBook } from "../types/book";
 
@@ -12,7 +19,7 @@ export async function fetchBooks(): Promise<IBook[]> {
     books.push(el);
   });
 
-  return books
+  return books;
 }
 
 export async function fetchOneBook(id: string): Promise<IBook> {
@@ -29,7 +36,7 @@ export async function addBook(book: IBook) {
   await setDoc(doc(db, "books", String(Date.now())), book);
 }
 
-export async function addBooks(books:IBook) {
+export async function addBooks(books: IBook) {
   const newCityRef = doc(collection(db, "books"));
   await setDoc(newCityRef, books);
 }

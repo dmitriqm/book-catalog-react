@@ -5,7 +5,6 @@ interface GroupedBooksByAuthor {
   [year: number | string]: IBook[];
 }
 
-export function groupBooksByYear(books: IBook[]): GroupedBooksByAuthor{
-  return lodash.groupBy(books, (book) => book.year)
+export function groupBooksByYear(books: IBook[]): GroupedBooksByAuthor {
+  return lodash.groupBy(books, (book) => book.year);
 }
-

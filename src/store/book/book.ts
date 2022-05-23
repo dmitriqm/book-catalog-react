@@ -21,7 +21,7 @@ const initialState: BookState = {
 export const fetchBookById = createAsyncThunk(
   "book/fetchBooksById",
   async (id: string) => {
-    return await fetchOneBook(id)
+    return await fetchOneBook(id);
   }
 );
 
@@ -30,14 +30,14 @@ export const booksSlice = createSlice({
   initialState,
   reducers: {
     resetBook(state: BookState) {
-      state.book = {} as IBook
-    }
+      state.book = {} as IBook;
+    },
   },
   extraReducers(builder) {
     builder
       .addCase(fetchBookById.pending, (state) => {
-        state.loading = true
-        state.error = null
+        state.loading = true;
+        state.error = null;
       })
       .addCase(fetchBookById.fulfilled, (state, action) => {
         state.loading = false;
@@ -51,5 +51,5 @@ export const booksSlice = createSlice({
   },
 });
 
-export const {resetBook} = booksSlice.actions;
+export const { resetBook } = booksSlice.actions;
 export default booksSlice.reducer;

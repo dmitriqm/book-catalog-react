@@ -4,7 +4,7 @@ import {
   SerializedError,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { IBook} from "../../types/book";
+import { IBook } from "../../types/book";
 import { BookGroupType } from "../../types/BookGroupType";
 import { fetchBooks } from "../../utils/firebase";
 
@@ -12,9 +12,9 @@ import { groupBooksByAuthor } from "../../utils/groupByAuthors";
 import { groupBooksByYear } from "../../utils/groupByYear";
 
 interface BookState {
-  loading: boolean,
-  data: IBook,
-  error: SerializedError | null
+  loading: boolean;
+  data: IBook;
+  error: SerializedError | null;
 }
 
 interface BooksState {
@@ -39,14 +39,13 @@ const initialState: BooksState = {
   groupType: BookGroupType.Year,
   groupedBooks: {},
   loading: false,
-  book: {loading: false, data: {} as IBook, error: null},
+  book: { loading: false, data: {} as IBook, error: null },
   recommendations: [] as IBook[],
 };
 
 export const fetchAllBooks = createAsyncThunk("books/fetchBooks", async () => {
-  return await fetchBooks()
+  return await fetchBooks();
 });
-
 
 export const booksSlice = createSlice({
   name: "books",
@@ -82,10 +81,12 @@ export const booksSlice = createSlice({
       })
       .addCase(fetchAllBooks.fulfilled, (state, action) => {
         state.loading = false;
-        state.books = action.payload.sort((a,b) => a.title > b.title? 1 : -1);
+        state.books = action.payload.sort((a, b) =>
+          a.title > b.title ? 1 : -1
+        );
         state.error = null;
-        booksSlice.caseReducers.groupRecommended(state)
-        booksSlice.caseReducers.groupBooks(state)
+        booksSlice.caseReducers.groupRecommended(state);
+        booksSlice.caseReducers.groupBooks(state);
       })
       .addCase(fetchAllBooks.rejected, (state, action) => {
         state.loading = false;
@@ -94,5 +95,6 @@ export const booksSlice = createSlice({
   },
 });
 
-export const { groupBooks, changeGroupType, groupRecommended } = booksSlice.actions;
+export const { groupBooks, changeGroupType, groupRecommended } =
+  booksSlice.actions;
 export default booksSlice.reducer;

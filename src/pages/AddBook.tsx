@@ -35,17 +35,16 @@ const AddBook = () => {
     name: "authors",
   });
   const navigate = useNavigate();
-  const {books} = useAppSelector(store => store.books)
-  const dispatch = useAppDispatch()
-
+  const { books } = useAppSelector((store) => store.books);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllBooks())
-  }, [])
+    dispatch(fetchAllBooks());
+  }, []);
 
-// Для удобства
+  // Для удобства
   const loadStartBooks = async (data: IBook) => {
-    addBooks(data)
+    addBooks(data);
   };
 
   const removeAuthor = (idx: number) => {
@@ -62,9 +61,8 @@ const AddBook = () => {
     title,
     year,
   }) => {
-    const newBook: IBook = {photoURL, title} as IBook;
+    const newBook: IBook = { photoURL, title } as IBook;
     newBook.authors = authors.map((author) => author.author);
-
 
     if (description) {
       newBook.description = description;
@@ -79,17 +77,26 @@ const AddBook = () => {
       newBook.ISBN = ISBN;
     }
 
-    if (!books.find(book => (book.title === newBook.title && book.authors.includes(newBook.authors[0])))) {
+    if (
+      !books.find(
+        (book) =>
+          book.title === newBook.title &&
+          book.authors.includes(newBook.authors[0])
+      )
+    ) {
       await addBook(newBook);
       window.alert("Книга успешно добавлена");
-      navigate("/catalog")
+      navigate("/catalog");
     } else {
-      window.alert("Книга этого автора с таким название уже существует")
+      window.alert("Книга этого автора с таким название уже существует");
     }
   };
   return (
     <>
-      <form className="w-full flex justify-center flex-col" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="w-full flex justify-center flex-col"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h1 className="text-2xl mb-6 text-center sm:text-3xl">
           Добавление новой книги
         </h1>
@@ -234,22 +241,21 @@ const AddBook = () => {
       </form>
       {/* Для удобства */}
       <div className="flex justify-center flex-col">
-      <button
-        disabled={books.length ? true : false}
-
-        type={"button"}
-        className={
-          "border rounded-2xl p-3 bg-slate-100 hover:bg-slate-200 mt-3"
-        }
-        onClick={() => {
-          for (let i = 0; i < startBooks.length; i++) {
-            loadStartBooks(startBooks[i]);
+        <button
+          disabled={books.length ? true : false}
+          type={"button"}
+          className={
+            "border rounded-2xl p-3 bg-slate-100 hover:bg-slate-200 mt-3"
           }
-        }}
-      >
-        Загрузить стартровые книги
-      </button>
-      <p className="text-red-500">Работает только если все книжки удалены</p>
+          onClick={() => {
+            for (let i = 0; i < startBooks.length; i++) {
+              loadStartBooks(startBooks[i]);
+            }
+          }}
+        >
+          Загрузить стартровые книги
+        </button>
+        <p className="text-red-500">Работает только если все книжки удалены</p>
       </div>
     </>
   );

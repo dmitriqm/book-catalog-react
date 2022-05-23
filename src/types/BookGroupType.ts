@@ -1,4 +1,4 @@
 export enum BookGroupType {
-  Year = 'year',
-  Author = 'author',
+  Year = "year",
+  Author = "author",
 }

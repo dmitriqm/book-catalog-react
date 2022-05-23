@@ -31,8 +31,10 @@ const Search = () => {
         <Loader />
       ) : (
         books
-          .filter((book) =>
-            book.title.toLowerCase().includes(inputValue.toLowerCase()) || includesStringInArray(inputValue, book.authors)
+          .filter(
+            (book) =>
+              book.title.toLowerCase().includes(inputValue.toLowerCase()) ||
+              includesStringInArray(inputValue, book.authors)
           )
           .map((book) => <BookCard book={book} key={book.id} />)
       )}

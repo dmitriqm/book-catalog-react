@@ -6,7 +6,7 @@ import { fetchBookById, resetBook } from "../store/book/book";
 import { deleteBookById } from "../utils/firebase";
 
 const Book = () => {
-  const { book, loading, error,  } = useAppSelector((store) => store.book);
+  const { book, loading, error } = useAppSelector((store) => store.book);
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,16 +17,16 @@ const Book = () => {
 
   const deleteHandler = async () => {
     if (window.confirm("Вы уверены, что хотитите удалить книгу?")) {
-      await deleteBookById(id!)
-      navigate('/catalog')
-      dispatch(resetBook())
+      await deleteBookById(id!);
+      navigate("/catalog");
+      dispatch(resetBook());
     }
   };
 
   if (error) {
     return <>Книга не найдена</>;
   }
-  
+
   return (
     <>
       {loading ? (

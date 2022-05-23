@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import BookCard from "../components/BookCard";
 import GroupWrapper from "../components/GroupWrapper";
 import Loader from "../components/Loader/Loader";
@@ -31,25 +31,26 @@ const Author = () => {
     }
   }, [books]);
 
-
   if (loading) {
-    return <Loader />
+    return <Loader />;
   }
 
-  return (  
-    <GroupWrapper title={author! !== 'undefined' ? author! : 'Год не указан'} length={authorBooks.length}>
-      {
-        authorBooks.length ? 
-          <>
+  return (
+    <GroupWrapper
+      title={author! !== "undefined" ? author! : "Год не указан"}
+      length={authorBooks.length}
+    >
+      {authorBooks.length ? (
+        <>
           {authorBooks.map((book) => (
             <BookCard book={book} key={book.id} />
-          ))} 
-          </>
-          : <p>Книги не найдены</p> 
-        
-      }
+          ))}
+        </>
+      ) : (
+        <p>Книги не найдены</p>
+      )}
     </GroupWrapper>
   );
 };
 
-export default Author
+export default Author;
