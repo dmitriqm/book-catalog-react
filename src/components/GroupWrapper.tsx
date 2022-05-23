@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface GroupProps {
   children?: React.ReactNode;
@@ -15,14 +15,14 @@ const GroupWrapper = ({ title, path, length, children }: GroupProps) => {
     <div className="lg:w-8/12 w-full flex flex-col items-center mb-6 flex-grow-0">
       <h2 className="self-start text-2xl md:text-3xl mb-4">
         {path ? (
-          <NavLink to={path} className="hover:text-amber-600">
+          <Link to={path} className="hover:text-amber-600">
             {title}
             {length ? (
               <span className="border rounded-xl p-1 ml-2 bg-slate-200 text-black">
                 {length}
               </span>
             ) : null}
-          </NavLink>
+          </Link>
         ) : (
           title
         )}
