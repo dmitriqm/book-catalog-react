@@ -23,7 +23,7 @@ const App = () => {
           <Route path="author/:author" element={<Author />} />
           <Route path="book/:id" element={<Book />} />
           <Route path="recommendations" element={<Recomendations />} />
-          <Route path="*" element={<></>} />
+          <Route path="*" element={<Navigate to={'catalog'} />} />
         </Route>
       </Routes>
     </BrowserRouter>
