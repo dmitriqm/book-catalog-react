@@ -3,37 +3,25 @@ import {
   createAsyncThunk,
   SerializedError,
 } from "@reduxjs/toolkit";
-import { doc, getDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../../firestore";
 import { IBook } from "../../types/book";
+import { fetchOneBook } from "../../utils/firebase";
 
 interface BookState {
   loading: boolean;
   book: IBook;
   error: SerializedError | null;
-  isDeleted: boolean
 }
 
 const initialState: BookState = {
   book: {} as IBook,
   error: null,
   loading: false,
-  isDeleted: false
 };
 
 export const fetchBookById = createAsyncThunk(
   "book/fetchBooksById",
   async (id: string) => {
-    const docSnap = await getDoc(doc(db, "books", id));
-    const book = docSnap.data() as IBook;
-    return book;
-  }
-);
-
-export const deleteBookById = createAsyncThunk(
-  "book/deleteBookById",
-  async (id: string) => {
-    await deleteDoc(doc(db, "books", id));
+    return await fetchOneBook(id)
   }
 );
 
@@ -43,7 +31,6 @@ export const booksSlice = createSlice({
   reducers: {
     resetBook(state: BookState) {
       state.book = {} as IBook
-      state.isDeleted = false
     }
   },
   extraReducers(builder) {
@@ -61,18 +48,6 @@ export const booksSlice = createSlice({
         state.loading = false;
         state.error = action.error;
       });
-
-    builder.addCase(deleteBookById.pending, (state) => {
-      state.loading = true
-      state.error = null
-    }).addCase(deleteBookById.fulfilled, (state) => {
-      state.loading = false
-      state.error = null
-      state.isDeleted = true
-    }).addCase(deleteBookById.rejected, (state, action) => {
-      state.loading = false
-      state.error = action.error
-    })
   },
 });
 

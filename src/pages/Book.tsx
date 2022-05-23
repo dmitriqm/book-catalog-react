@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Loader from "../components/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { deleteBookById, fetchBookById, resetBook } from "../store/book/book";
+import { fetchBookById, resetBook } from "../store/book/book";
+import { deleteBookById } from "../utils/firebase";
 
 const Book = () => {
-  const { book, loading, error, isDeleted } = useAppSelector((store) => store.book);
+  const { book, loading, error,  } = useAppSelector((store) => store.book);
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,16 +15,11 @@ const Book = () => {
     dispatch(fetchBookById(id!));
   }, []);
 
-  useEffect(() => {
-    if (isDeleted) {
+  const deleteHandler = async () => {
+    if (window.confirm("Вы уверены, что хотитите удалить книгу?")) {
+      await deleteBookById(id!)
       navigate('/catalog')
       dispatch(resetBook())
-    }
-  }, [isDeleted])
-
-  const deleteHandler = () => {
-    if (window.confirm("Вы уверены, что хотитите удалить книгу?")) {
-      dispatch(deleteBookById(id!));
     }
   };
 

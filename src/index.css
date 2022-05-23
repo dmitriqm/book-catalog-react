@@ -23,3 +23,7 @@ code {
 #root {
   @apply w-full
 }
+
+.input {
+  @apply h-8 outline-none bg-inherit border-b-2 mx-4 text-lg focus:border-orange-400 text-center;
+}

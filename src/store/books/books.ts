@@ -4,10 +4,9 @@ import {
   SerializedError,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firestore";
 import { IBook} from "../../types/book";
 import { BookGroupType } from "../../types/BookGroupType";
+import { fetchBooks } from "../../utils/firebase";
 
 import { groupBooksByAuthor } from "../../utils/groupByAuthors";
 import { groupBooksByYear } from "../../utils/groupByYear";
@@ -45,16 +44,7 @@ const initialState: BooksState = {
 };
 
 export const fetchAllBooks = createAsyncThunk("books/fetchBooks", async () => {
-  const books: IBook[] = [];
-  const querySnapshot = await getDocs(collection(db, "books"));
-
-  querySnapshot.forEach((doc) => {
-    const book = doc.data() as IBook;
-    book.id = doc.id;
-    books.push(book);
-  });
-
-  return books;
+  return await fetchBooks()
 });
 
 
