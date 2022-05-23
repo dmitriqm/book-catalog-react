@@ -5,8 +5,7 @@
 
 
 html, body {
-  width: 100%;
-  height: 100%; 
+  @apply  bg-[#F4F2EF];
 }
 
 body {
@@ -22,7 +21,9 @@ code {
 }
 
 #root {
-  width: 100%;
-  height: 100%;
-  background-color: #F4F2EF;
+  @apply w-full
+}
+
+.input {
+  @apply h-8 outline-none bg-inherit border-b-2 mx-4 text-lg focus:border-orange-400 text-center;
 }

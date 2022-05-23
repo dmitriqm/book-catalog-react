@@ -1,0 +1,7 @@
+.bookcard:hover .bookcard__title {
+  @apply text-amber-600
+}
+
+.bookcard__author:hover + .bookcard__title {
+  @apply text-black
+}
