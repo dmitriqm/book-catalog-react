@@ -8,9 +8,10 @@ import logo from "../assets/logo.svg";
 import menu from "../assets/menu.svg";
 
 const navs = [
-  // { title: "Поиск", to: "/search" },
-  { title: "Каталог", to: "/catalog" },
-  { title: "Рекомендации", to: "recomendations" },
+  { title: "Поиск", to: "search" },
+  { title: "Каталог", to: "catalog" },
+  { title: "Рекомендации", to: "recommendations" },
+  { title: "Добавить", to: "add" },
 ];
 
 const Navbar = () => {
@@ -55,7 +56,7 @@ const Navbar = () => {
 
       <div
         className={`lg:h-0 lg:hidden ${
-          isOpen ? `h-40` : "h-0"
+          isOpen ? `h-64` : "h-0"
         } overflow-hidden transition-all duration-700 ease-out flex flex-col`}
       >
         {isOpen ? (

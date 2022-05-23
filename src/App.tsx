@@ -6,6 +6,9 @@ import Catalog from "./pages/Catalog";
 import Recomendations from "./pages/Recomendations";
 import Search from "./pages/Search";
 import Author from "./pages/Author";
+import AddBook from "./pages/AddBook";
+import Book from "./pages/Book";
+import Year from "./pages/Year";
 
 const App = () => {
   return (
@@ -14,9 +17,12 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to={'catalog'} />}></Route>
           <Route path="search" element={<Search />} />
+          <Route path="add" element={<AddBook />} />
           <Route path="catalog" element={<Catalog />} />
+          <Route path="year/:year" element={<Year />} />
           <Route path="author/:author" element={<Author />} />
-          <Route path="recomendations" element={<Recomendations />} />
+          <Route path="book/:id" element={<Book />} />
+          <Route path="recommendations" element={<Recomendations />} />
           <Route path="*" element={<></>} />
         </Route>
       </Routes>

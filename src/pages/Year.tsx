@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import BookCard from "../components/BookCard";
 import GroupWrapper from "../components/GroupWrapper";
 import Loader from "../components/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { fetchAllBooks } from "../store/books/books";
-import { BookGroupType } from "../types/BookGroupType";
-import { groupBooksByAuthor } from "../utils/groupByAuthors";
 import { IBook } from "../types/book";
+import { BookGroupType } from "../types/BookGroupType";
+import { groupBooksByYear } from "../utils/groupByYear";
 
 const Author = () => {
-  const { author } = useParams();
+  const { year } = useParams();
   const { groupType, groupedBooks, books, loading } = useAppSelector(
     (store) => store.books
   );
-  const [authorBooks, setAuthorBooks] = useState([] as IBook[]);
+  const [yearBooks, setYearBooks] = useState([] as IBook[]);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,10 +24,10 @@ const Author = () => {
   }, []);
 
   useEffect(() => {
-    if (groupType === BookGroupType.Author) {
-      setAuthorBooks(groupedBooks[author!] || []);
+    if (groupType === BookGroupType.Year) {
+      setYearBooks(groupedBooks[year!] || []);
     } else {
-      setAuthorBooks(groupBooksByAuthor(books)[author!] || []);
+      setYearBooks(groupBooksByYear(books)[year!] || []);
     }
   }, [books]);
 
@@ -37,11 +37,11 @@ const Author = () => {
   }
 
   return (  
-    <GroupWrapper title={author! !== 'undefined' ? author! : 'Год не указан'} length={authorBooks.length}>
+    <GroupWrapper title={year! !== 'undefined' ? year! : 'Год не указан'} length={yearBooks.length}>
       {
-        authorBooks.length ? 
+        yearBooks.length ? 
           <>
-          {authorBooks.map((book) => (
+          {yearBooks.map((book) => (
             <BookCard book={book} key={book.id} />
           ))} 
           </>
@@ -52,4 +52,4 @@ const Author = () => {
   );
 };
 
-export default Author
+export default Author;

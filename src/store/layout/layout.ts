@@ -16,7 +16,7 @@ const layoutSlice = createSlice({
   name: "layout",
   initialState,
   reducers: {
-    toggleMenu(state) {
+    toggleMenu(state: LayoutState) {
       state.navmenu.isOpen = !state.navmenu.isOpen;
     },
   },
