@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Loader from "../components/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { fetchBookById, resetBook } from "../store/book/book";
+import { clearBooks } from "../store/books/books";
 import { deleteBookById } from "../utils/firebase";
 
 const Book = () => {
@@ -17,6 +18,7 @@ const Book = () => {
 
   const deleteHandler = async () => {
     if (window.confirm("Вы уверены, что хотитите удалить книгу?")) {
+      dispatch(clearBooks())
       await deleteBookById(id!);
       navigate("/catalog");
       dispatch(resetBook());

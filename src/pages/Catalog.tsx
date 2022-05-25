@@ -52,15 +52,7 @@ const Catalog = () => {
               path="/recommendations"
               length={recommendations.length}
             >
-              <BookCard
-                book={
-                  recommendations[
-                    recommendedIndex < recommendations.length
-                      ? recommendedIndex
-                      : recommendedIndex - 1
-                  ]
-                }
-              />
+              <BookCard book={recommendations[recommendedIndex]} />
             </GroupWrapper>
             {recommendations.length > 1 ? (
               <button

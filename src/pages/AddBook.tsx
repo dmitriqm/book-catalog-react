@@ -6,7 +6,7 @@ import { addBook, addBooks } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useEffect } from "react";
-import { fetchAllBooks } from "../store/books/books";
+import { clearBooks, fetchAllBooks } from "../store/books/books";
 
 interface FormValues {
   title: string;
@@ -85,6 +85,7 @@ const AddBook = () => {
       )
     ) {
       await addBook(newBook);
+      dispatch(clearBooks())
       window.alert("Книга успешно добавлена");
       navigate("/catalog");
     } else {

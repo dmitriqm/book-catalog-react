@@ -18,7 +18,6 @@ interface BookState {
 }
 
 interface BooksState {
-  book: BookState;
   recommendations: IBook[];
   groupedBooks:
     | {
@@ -39,7 +38,6 @@ const initialState: BooksState = {
   groupType: BookGroupType.Year,
   groupedBooks: {},
   loading: false,
-  book: { loading: false, data: {} as IBook, error: null },
   recommendations: [] as IBook[],
 };
 
@@ -72,6 +70,11 @@ export const booksSlice = createSlice({
     changeGroupType(state: BooksState, action: PayloadAction<BookGroupType>) {
       state.groupType = action.payload;
     },
+    clearBooks(state: BooksState) {
+      state.books = []
+      state.recommendations = []
+      state.groupedBooks = {}
+    }
   },
   extraReducers(builder) {
     builder
@@ -95,6 +98,6 @@ export const booksSlice = createSlice({
   },
 });
 
-export const { groupBooks, changeGroupType, groupRecommended } =
+export const { groupBooks, changeGroupType, groupRecommended, clearBooks } =
   booksSlice.actions;
 export default booksSlice.reducer;
