@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 interface GroupProps {
-  children?: React.ReactNode;
-  title: string;
-  length?: number;
-  path?: string;
+  children?: React.ReactNode
+  title: string
+  length?: number
+  path?: string
 }
 
 const GroupWrapper = ({ title, path, length, children }: GroupProps) => {
   if (!children) {
-    return null;
+    return null
   }
   return (
     <div className="lg:w-8/12 w-full flex flex-col items-center mb-6 flex-grow-0">
@@ -31,7 +31,7 @@ const GroupWrapper = ({ title, path, length, children }: GroupProps) => {
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default GroupWrapper;
+export default GroupWrapper

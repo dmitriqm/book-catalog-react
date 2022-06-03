@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import BookCard from "../components/BookCard";
-import GroupWrapper from "../components/GroupWrapper";
-import Loader from "../components/Loader/Loader";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { fetchAllBooks } from "../store/books/books";
-import { includesStringInArray } from "../utils/includesStringInArray";
+import React, { useEffect, useState } from "react"
+import BookCard from "../components/BookCard"
+import GroupWrapper from "../components/GroupWrapper"
+import Loader from "../components/Loader/Loader"
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
+import { fetchAllBooks } from "../store/books/books"
+import { includesStringInArray } from "../utils/includesStringInArray"
 
 const Search = () => {
-  const { books, loading } = useAppSelector((store) => store.books);
-  const [inputValue, setInputValue] = useState("");
-  const dispatch = useAppDispatch();
+  const { books, loading } = useAppSelector((store) => store.books)
+  const [inputValue, setInputValue] = useState("")
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (!books.length) {
-      dispatch(fetchAllBooks());
+      dispatch(fetchAllBooks())
     }
-  }, []);
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
+    setInputValue(e.target.value)
+  }
 
   return (
     <GroupWrapper title="Поиск">
@@ -39,7 +39,7 @@ const Search = () => {
           .map((book) => <BookCard book={book} key={book.id} />)
       )}
     </GroupWrapper>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

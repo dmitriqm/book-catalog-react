@@ -1,45 +1,45 @@
-import BookCard from "../components/BookCard";
-import GroupWrapper from "../components/GroupWrapper";
+import BookCard from "../components/BookCard"
+import GroupWrapper from "../components/GroupWrapper"
 
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
+import { useEffect, useState } from "react"
 import {
   changeGroupType,
   fetchAllBooks,
   groupBooks,
-} from "../store/books/books";
-import { BookGroupType } from "../types/BookGroupType";
-import Loader from "../components/Loader/Loader";
+} from "../store/books/books"
+import { BookGroupType } from "../types/BookGroupType"
+import Loader from "../components/Loader/Loader"
 
 const Catalog = () => {
   const { books, groupedBooks, error, loading, groupType, recommendations } =
-    useAppSelector((store) => store.books);
-  const dispatch = useAppDispatch();
+    useAppSelector((store) => store.books)
+  const dispatch = useAppDispatch()
   const [recommendedIndex, setRecommendedIndex] = useState(
     Math.floor(Math.random() * recommendations.length)
-  );
+  )
 
   useEffect(() => {
-    dispatch(fetchAllBooks());
-  }, []);
+    dispatch(fetchAllBooks())
+  }, [])
 
   useEffect(() => {
-    dispatch(groupBooks());
-  }, [groupType, books]);
+    dispatch(groupBooks())
+  }, [groupType, books])
 
   if (error) {
-    <h2>Ошибка! Не получилось загрузить книги</h2>;
+    ;<h2>Ошибка! Не получилось загрузить книги</h2>
   }
   const changeRecommendedIndex = () => {
-    let newIndex = Math.floor(Math.random() * recommendations.length);
+    let newIndex = Math.floor(Math.random() * recommendations.length)
     while (newIndex === recommendedIndex && newIndex < recommendations.length) {
-      newIndex = Math.floor(Math.random() * recommendations.length);
+      newIndex = Math.floor(Math.random() * recommendations.length)
     }
-    setRecommendedIndex(newIndex);
-  };
+    setRecommendedIndex(newIndex)
+  }
 
   if (loading) {
-    return <Loader />;
+    return <Loader />
   }
 
   return (
@@ -103,7 +103,7 @@ const Catalog = () => {
                 path={`/${groupType}/${groupTitle}`}
               >
                 {groupedBooks[groupTitle].map((book) => {
-                  return <BookCard book={book} key={book.id} />;
+                  return <BookCard book={book} key={book.id} />
                 })}
               </GroupWrapper>
             ))}
@@ -114,14 +114,14 @@ const Catalog = () => {
               length={groupedBooks["undefined"].length}
             >
               {groupedBooks["undefined"].map((book) => {
-                return <BookCard book={book} key={book.id} />;
+                return <BookCard book={book} key={book.id} />
               })}
             </GroupWrapper>
           ) : null}
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Catalog;
+export default Catalog

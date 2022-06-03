@@ -1,32 +1,32 @@
-import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Loader from "../components/Loader/Loader";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { fetchBookById, resetBook } from "../store/book/book";
-import { clearBooks } from "../store/books/books";
-import { deleteBookById } from "../utils/firebase";
+import { useEffect } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import Loader from "../components/Loader/Loader"
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
+import { fetchBookById, resetBook } from "../store/book/book"
+import { clearBooks } from "../store/books/books"
+import { deleteBookById } from "../utils/firebase"
 
 const Book = () => {
-  const { book, loading, error } = useAppSelector((store) => store.book);
-  const dispatch = useAppDispatch();
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { book, loading, error } = useAppSelector((store) => store.book)
+  const dispatch = useAppDispatch()
+  const { id } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(fetchBookById(id!));
-  }, []);
+    dispatch(fetchBookById(id!))
+  }, [])
 
   const deleteHandler = async () => {
     if (window.confirm("Вы уверены, что хотитите удалить книгу?")) {
       dispatch(clearBooks())
-      await deleteBookById(id!);
-      navigate("/catalog");
-      dispatch(resetBook());
+      await deleteBookById(id!)
+      navigate("/catalog")
+      dispatch(resetBook())
     }
-  };
+  }
 
   if (error) {
-    return <>Книга не найдена</>;
+    return <>Книга не найдена</>
   }
 
   return (
@@ -118,7 +118,7 @@ const Book = () => {
         <h2>Книга не найдена</h2>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Book;
+export default Book

@@ -1,4 +1,4 @@
-import { IBook } from "../types/book";
+import { IBook } from "../types/book"
 
 export const startBooks: IBook[] = [
   {
@@ -104,4 +104,4 @@ export const startBooks: IBook[] = [
     rating: 5,
     year: 2011,
   },
-];
+]

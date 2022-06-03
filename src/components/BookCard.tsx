@@ -1,24 +1,24 @@
-import { MouseEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { IBook } from "../types/book";
-import "./styles/BookCard.css";
+import { MouseEvent } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { IBook } from "../types/book"
+import "./styles/BookCard.css"
 
 interface BookCardProps {
-  book: IBook;
+  book: IBook
 }
 
 const BookCard = ({
   book: { id, authors, photoURL, title },
 }: BookCardProps) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleClick = (id: string) => {
-    navigate(`/book/${id}`);
-  };
+    navigate(`/book/${id}`)
+  }
 
   const handleLinkClick = (event: MouseEvent) => {
-    event.stopPropagation();
-  };
+    event.stopPropagation()
+  }
 
   return (
     <div
@@ -65,7 +65,7 @@ const BookCard = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BookCard;
+export default BookCard

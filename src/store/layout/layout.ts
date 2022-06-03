@@ -1,26 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
 interface LayoutState {
   navmenu: {
-    isOpen: boolean;
-  };
+    isOpen: boolean
+  }
 }
 
 const initialState = {
   navmenu: {
     isOpen: false,
   },
-} as LayoutState;
+} as LayoutState
 
 const layoutSlice = createSlice({
   name: "layout",
   initialState,
   reducers: {
     toggleMenu(state: LayoutState) {
-      state.navmenu.isOpen = !state.navmenu.isOpen;
+      state.navmenu.isOpen = !state.navmenu.isOpen
     },
   },
-});
+})
 
-export const { toggleMenu } = layoutSlice.actions;
-export default layoutSlice.reducer;
+export const { toggleMenu } = layoutSlice.actions
+export default layoutSlice.reducer

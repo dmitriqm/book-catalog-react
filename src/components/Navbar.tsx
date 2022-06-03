@@ -1,22 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
 
-import { toggleMenu } from "../store/layout/layout";
+import { toggleMenu } from "../store/layout/layout"
 
-import logo from "../assets/logo.svg";
-import menu from "../assets/menu.svg";
+import logo from "../assets/logo.svg"
+import menu from "../assets/menu.svg"
 
 const navs = [
   { title: "Поиск", to: "search" },
   { title: "Каталог", to: "catalog" },
   { title: "Рекомендации", to: "recommendations" },
   { title: "Добавить", to: "add" },
-];
+]
 
 const Navbar = () => {
-  const { isOpen } = useAppSelector((store) => store.layout.navmenu);
-  const dispatch = useAppDispatch();
+  const { isOpen } = useAppSelector((store) => store.layout.navmenu)
+  const dispatch = useAppDispatch()
 
   return (
     <nav className="flex flex-col lg:flex-row justify-between lg:h-20 border-slate-200 bg-white w-full flex-grow-0 flex-shrink-0">
@@ -82,7 +82,7 @@ const Navbar = () => {
         ) : null}
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

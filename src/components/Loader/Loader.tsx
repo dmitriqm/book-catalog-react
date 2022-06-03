@@ -1,13 +1,13 @@
-import "./Loader.css";
+import "./Loader.css"
 
 const Loader = () => (
   <div className="flex justify-center">
-  <div className="lds-facebook">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div className="lds-facebook">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
-  </div>
-);
+)
 
-export default Loader;
+export default Loader

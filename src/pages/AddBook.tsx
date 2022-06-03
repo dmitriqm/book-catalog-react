@@ -1,21 +1,21 @@
-import { IBook } from "../types/book";
-import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
+import { IBook } from "../types/book"
+import { SubmitHandler, useForm, useFieldArray } from "react-hook-form"
 
-import { startBooks } from "../temp/books";
-import { addBook, addBooks } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { useEffect } from "react";
-import { clearBooks, fetchAllBooks } from "../store/books/books";
+import { startBooks } from "../temp/books"
+import { addBook, addBooks } from "../utils/firebase"
+import { useNavigate } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
+import { useEffect } from "react"
+import { clearBooks, fetchAllBooks } from "../store/books/books"
 
 interface FormValues {
-  title: string;
-  photoURL: string;
-  year: string;
-  description: string;
-  authors: { author: string }[];
-  ISBN: string;
-  rating: string;
+  title: string
+  photoURL: string
+  year: string
+  description: string
+  authors: { author: string }[]
+  ISBN: string
+  rating: string
 }
 
 const AddBook = () => {
@@ -29,29 +29,29 @@ const AddBook = () => {
       authors: [{ author: "" }],
     },
     mode: "onBlur",
-  });
+  })
   const { fields, remove, append } = useFieldArray<FormValues>({
     control,
     name: "authors",
-  });
-  const navigate = useNavigate();
-  const { books } = useAppSelector((store) => store.books);
-  const dispatch = useAppDispatch();
+  })
+  const navigate = useNavigate()
+  const { books } = useAppSelector((store) => store.books)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchAllBooks());
-  }, []);
+    dispatch(fetchAllBooks())
+  }, [])
 
   // Для удобства
   const loadStartBooks = async (data: IBook) => {
-    addBooks(data);
-  };
+    addBooks(data)
+  }
 
   const removeAuthor = (idx: number) => {
     if (fields.length > 1) {
-      remove(idx);
+      remove(idx)
     }
-  };
+  }
   const onSubmit: SubmitHandler<FormValues> = async ({
     ISBN,
     authors,
@@ -61,20 +61,20 @@ const AddBook = () => {
     title,
     year,
   }) => {
-    const newBook: IBook = { photoURL, title } as IBook;
-    newBook.authors = authors.map((author) => author.author);
+    const newBook: IBook = { photoURL, title } as IBook
+    newBook.authors = authors.map((author) => author.author)
 
     if (description) {
-      newBook.description = description;
+      newBook.description = description
     }
     if (rating) {
-      newBook.rating = Number(rating);
+      newBook.rating = Number(rating)
     }
     if (year) {
-      newBook.year = Number(year);
+      newBook.year = Number(year)
     }
     if (ISBN) {
-      newBook.ISBN = ISBN;
+      newBook.ISBN = ISBN
     }
 
     if (
@@ -84,14 +84,14 @@ const AddBook = () => {
           book.authors.includes(newBook.authors[0])
       )
     ) {
-      await addBook(newBook);
+      await addBook(newBook)
       dispatch(clearBooks())
-      window.alert("Книга успешно добавлена");
-      navigate("/catalog");
+      window.alert("Книга успешно добавлена")
+      navigate("/catalog")
     } else {
-      window.alert("Книга этого автора с таким название уже существует");
+      window.alert("Книга этого автора с таким название уже существует")
     }
-  };
+  }
   return (
     <>
       <form
@@ -250,7 +250,7 @@ const AddBook = () => {
           }
           onClick={() => {
             for (let i = 0; i < startBooks.length; i++) {
-              loadStartBooks(startBooks[i]);
+              loadStartBooks(startBooks[i])
             }
           }}
         >
@@ -259,7 +259,7 @@ const AddBook = () => {
         <p className="text-red-500">Работает только если все книжки удалены</p>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default AddBook;
+export default AddBook

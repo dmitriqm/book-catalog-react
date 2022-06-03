@@ -1,10 +1,10 @@
-import lodash from "lodash";
-import { IBook } from "../types/book";
+import lodash from "lodash"
+import { IBook } from "../types/book"
 
 interface GroupedBooksByAuthor {
-  [year: number | string]: IBook[];
+  [year: number | string]: IBook[]
 }
 
 export function groupBooksByYear(books: IBook[]): GroupedBooksByAuthor {
-  return lodash.groupBy(books, (book) => book.year);
+  return lodash.groupBy(books, (book) => book.year)
 }

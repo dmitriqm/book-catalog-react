@@ -1,21 +1,21 @@
-import { IBook } from "../types/book";
+import { IBook } from "../types/book"
 
 interface GroupedBooksByAuthor {
-  [author: string]: IBook[];
+  [author: string]: IBook[]
 }
 
 export function groupBooksByAuthor(books: IBook[]): GroupedBooksByAuthor {
-  const groupedBooks: GroupedBooksByAuthor = {};
+  const groupedBooks: GroupedBooksByAuthor = {}
 
   books.forEach((book) => {
     book.authors.forEach((author) => {
       if (groupedBooks.hasOwnProperty(author)) {
-        groupedBooks[author].push(book);
+        groupedBooks[author].push(book)
       } else {
-        groupedBooks[author] = [book];
+        groupedBooks[author] = [book]
       }
-    });
-  });
+    })
+  })
 
-  return groupedBooks;
+  return groupedBooks
 }
